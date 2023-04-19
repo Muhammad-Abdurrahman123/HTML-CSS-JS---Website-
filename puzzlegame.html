@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>Puzzle GAME!</title>
+<style>
+/*The canvas in the CSS code below refers the background of the game that is advertised on this page.*/
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+body {
+  background-color: #25D8CB;
+}
+p {
+  font-family: verdana;
+  font-size: 15px;
+}
+/*This is the CSS code for the customization of the navigation bar, in greater detail.*/
+ul {
+  list-style-type: none;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: hidden;
+  padding: 0;
+  background-color: #333;
+  text-align: center;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: verdana;
+}
+
+li a:hover {
+  background-color: #111;
+}
+.stargraphic {
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+}
+footer {
+  padding: 9px 18px;
+  background: grey;
+  color: white;
+  text-align: center;
+}
+</style>
+</head>
+<body onload="startGame()">
+<script>
+// The below code is for the video game on my website.
+var myGamePiece;
+var myObstacles = [];
+var myScore;
+
+function startGame() {
+    myGamePiece = new component(30, 30, "red", 10, 120);
+    myGamePiece.gravity = 0.05;
+    myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+    myGameArea.start();
+}
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 480;
+        this.canvas.height = 270;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.frameNo = 0;
+        this.interval = setInterval(updateGameArea, 20);
+        },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+function component(width, height, color, x, y, type) {
+    this.type = type;
+    this.score = 0;
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.x = x;
+    this.y = y;
+    this.gravity = 0;
+    this.gravitySpeed = 0;
+    this.update = function() {
+        ctx = myGameArea.context;
+        if (this.type == "text") {
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = color;
+            ctx.fillText(this.text, this.x, this.y);
+        } else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+    }
+    this.newPos = function() {
+        this.gravitySpeed += this.gravity;
+        this.x += this.speedX;
+        this.y += this.speedY + this.gravitySpeed;
+        this.hitBottom();
+    }
+    this.hitBottom = function() {
+        var rockbottom = myGameArea.canvas.height - this.height;
+        if (this.y > rockbottom) {
+            this.y = rockbottom;
+            this.gravitySpeed = 0;
+        }
+    }
+    this.crashWith = function(otherobj) {
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            crash = false;
+        }
+        return crash;
+    }
+}
+
+function updateGameArea() {
+    var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+    for (i = 0; i < myObstacles.length; i += 1) {
+        if (myGamePiece.crashWith(myObstacles[i])) {
+            return;
+        } 
+    }
+    myGameArea.clear();
+    myGameArea.frameNo += 1;
+    if (myGameArea.frameNo == 1 || everyinterval(150)) {
+        x = myGameArea.canvas.width;
+        minHeight = 20;
+        maxHeight = 200;
+        height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+        minGap = 50;
+        maxGap = 200;
+        gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+        myObstacles.push(new component(10, height, "green", x, 0));
+        myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
+    }
+    for (i = 0; i < myObstacles.length; i += 1) {
+        myObstacles[i].x += -1;
+        myObstacles[i].update();
+    }
+    myScore.text="SCORE: " + myGameArea.frameNo;
+    myScore.update();
+    myGamePiece.newPos();
+    myGamePiece.update();
+}
+
+function everyinterval(n) {
+    if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+    return false;
+}
+
+function accelerate(n) {
+    myGamePiece.gravity = n;
+}
+// Code for the video game ends here. Keep in mind that this game will not work without the canvas.
+</script>
+<br>
+<button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
+<p>Use the ACCELERATE button to stay in the air</p>
+<p>How long can you stay alive?</p>
+<br><br><br>
+
+ <ul class="navbar">
+   <li><a href=#Home>Home</a></li>
+   <li><a href=file:///C:/Users/10669849/Documents/comedy.html>Comedy</a></li>
+   <li><a href=file:///C:/Users/10669849/Documents/horror.html>Horror</a></li>
+   <li><a href=file:///C:/Users/10669849/Documents/musical.html>Musical</a></li>
+   <li><a href=file:///C:/Users/10669849/Documents/thriller.html>Thriller</a></li>
+   <li><a href=file:///C:/Users/10669849/Documents/drama.html>Drama</a></li>
+   </ul>
+
+<!--Below is the code for a graphic shape created using HTML, it is a demonstration that I can create graphics on my HTML website.-->
+<svg class="stargraphic" width="300" height="200" preserveAspectRatio="xMidYMin">
+  <polygon points="100,10 40,198 190,78 10,78 160,198"
+  style="fill:#B5BFBF;stroke:black;stroke-width:0;fill-rule:nonzero;" />
+</svg>
+    
+<!--Code for the footer of the webpage.-->
+<footer>
+  <p>Creator: Muhammad Abdurrahman<br>
+  <a href="10669849@bradfordcollege.ac.uk">Email</a></p>
+  <!--This code below is the link to a separate page where you can play an online game, it is the link to this particular page.-->
+  <a href=file:///C:/Users/10669849/Documents/puzzlegame.html>PLAY OUR GAME!</a>
+</footer>
+</body>
+</html>

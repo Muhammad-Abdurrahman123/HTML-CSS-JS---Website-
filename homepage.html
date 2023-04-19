@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--The below code is declaring the character set that will be used.-->
+    <meta charset="utf-8">
+  <!--This is the imported file used for the visual look of the social media icons found in the website.-->
+    <meta name="viewport" content=
+        "width=device-width, initial-scale=1">
+    <link rel="stylesheet" href=
+"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+/*This is the color of the background*/
+body {
+  background-color: #25D8CB;
+}
+/*The following is the code responsible for customizing all the text on the website. This includes colour, font style, and the alignment of text.*/
+title  {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+h1  {
+  color: blue;
+  font-family: verdana;
+}
+h2  {
+  color: blue;
+  font-family: verdana;
+}
+h3  {
+  color: blue;
+  font-family: verdana;
+  text-align: center;
+  font-size: 25px;
+}
+p   {
+  color: white;
+  font-family: verdana;
+}
+/*This is the code behind the navigation bar. I attempted to make the navigation bar centered, but for some reason it does not work.*/
+.navbar {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  left: 0;
+  right: 0;
+}
+/*This is the CSS side of the code behind the social media icons, as seen, each social media icon is separate and distinguished*/
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 25px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: blue;
+}
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+.fa-youtube {
+  background: #bb0000;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+/*Below is the CSS code for the images of films displayed on this particular webpage*/
+.sparta  {
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+.shrek  {
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+ }
+.twelveangrymen {
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/*This is the code responsible for how the images on the webpage are displayed, arranged in a sort of grid, with columns and rows*/
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px 150px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+/*This is the CSS code for the customization of the navigation bar, in greater detail.*/
+ul {
+  list-style-type: none;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: hidden;
+  padding: 0;
+  background-color: #333;
+  text-align: center;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: verdana;
+}
+
+li a:hover {
+  background-color: #111;
+}
+/*This is the CSS code behind forms, which includes the search bar, and the comment box.*/
+form {
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 5px;
+}
+.searchbar {
+
+}
+/*This is the CSS code responsible for the very bottom of the webpage.*/
+footer {
+  padding: 9px 18px;
+  background: grey;
+  color: white;
+  text-align: center;
+}
+</style>
+<title>Star Films Website</title>
+</head>
+<body>
+<img src=file:///C:/Users/10669849/Documents/websitelogo.jpg alt="companylogo">
+<h1 style="color:blue;"> Welcome to Star Films</h1>
+<p><em>Here at Star Films, we display the greatest films of the 21st century</em></p>
+ <ul class="navbar">
+   <li><a href=#Home>Home</a></li>
+   <li><a href=file:///C:/Users/10669849/Documents/comedy.html>Comedy</a></li>
+   <li><a href=file:///C:/Users/10669849/Documents/horror.html>Horror</a></li>
+   <li><a href=file:///C:/Users/10669849/Documents/musical.html>Musical</a></li>
+   <li><a href=file:///C:/Users/10669849/Documents/thriller.html>Thriller</a></li>
+   <li><a href=file:///C:/Users/10669849/Documents/drama.html>Drama</a></li>
+   </ul>
+<h2>About Us</h2>
+<p>We are based out of Bradford. We promote, advertise and sell films that have been popular throughout the 20th and 21st centuries. We hope you enjoy our illustrious catalogue.</p>
+<h3><strong>Films of the week!</strong></h3>
+
+<!--This is the HTML code behind the creation of the search bar-->
+<form class="searchbar"> 
+  <input type="search" id="query" name="q" placeholder="Search Films...">
+  <button>Search</button>
+</form>
+    <script>
+      const f = document.getElementById('form');
+      const q = document.getElementById('query');
+      const google = 'https://www.google.com/search?q=site%3A+';
+      const site = 'pagedart.com';
+
+      function submitted(event) {
+        event.preventDefault();
+        const url = google + site + '+' + q.value;
+        const win = window.open(url, '_blank');
+        win.focus();
+      }
+
+      f.addEventListener('submit', submitted);
+    </script>
+<!--Below is the code for images that are displayed, most of the code is to make sure the images are in a grid format.-->
+<div class="row">
+  <div class="column">  
+    <img src=https://resizing.flixster.com/WPGXy6U0bxJt7RhgJUbOSAZxAoU=/206x305/v2/https://flxt.tmsimg.com/assets/p163191_p_v8_al.jpg title="300" class="sparta" width="200" height="300" alt="Film1">
+  </div>
+  <div class="column">
+    <img src=https://upload.wikimedia.org/wikipedia/commons/b/b5/12_Angry_Men_%281957_film_poster%29.jpg title="Twelve Angry Men" class="twelveangrymen" width="200" height="300" alt="Film 3"> 
+  </div>
+  <div class="column">
+    <img src=https://s3.amazonaws.com/static.rogerebert.com/uploads/movie/movie_poster/shrek-2001/large_140ewbWv8qHStD3mlBDvvGd0Zvu.jpg title="Shrek" class="shrek" width="200" height="300" alt="Film2">
+  </div>
+</div>
+
+<!--This is the HTML code behind the social media icons. As you can see, they are linked to their respective social media websites.-->
+<a href=https://www.facebook.com/ class="fa fa-facebook"></a>
+<a href=https://www.twitter.com/ class="fa fa-twitter"></a>
+<a href=https://www.youtube.com/ class="fa fa-youtube"></a>
+<a href=https://www.instagram.com/ class="fa fa-instagram"></a>
+
+<!--This is the HTML code behind the comment box.-->
+<form action="/html/tags/html_form_tag_action.cfm" method="post">
+<div>
+<textarea name="comments" id="comments" style="font-family:sans-serif;font-size:1.2em;">
+</textarea>
+</div>
+<input type="submit" value="Submit">
+</form>
+
+
+<footer>
+  <p>Creator: Muhammad Abdurrahman<br>
+  <a href="10669849@bradfordcollege.ac.uk">Email</a></p>
+  <!--This code below is the link to a separate page where you can play an online game.-->
+  <a href=file:///C:/Users/10669849/Documents/puzzlegame.html>PLAY OUR GAME!</a>
+</footer>
+
+  </body>
+</html>
